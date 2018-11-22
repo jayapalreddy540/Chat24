@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Chat24</string>
+    <string name="create_a_new_account">CREATE A NEW ACCOUNT?</string>
+    <string name="welcome_to_chat24">Welcome to CHAT24</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create">CREATE</string>
+    <string name="logout">Logout</string>
+    <string name="create_a_new_account1">Create A New Account</string>
 </resources>

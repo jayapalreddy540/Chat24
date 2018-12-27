@@ -13,11 +13,13 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-
+    private DatabaseReference mUserRef;
 
     private ViewPager mViewPager;
     private Toolbar mToolbar;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         //setSupportActionBar(mToolbar);
        // getSupportActionBar().setTitle("Chat24");
 
+        mUserRef=FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
+
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
          mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -55,7 +59,15 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser==null){
             sendToStart();
         }
+        else {
+            mUserRef.child("online").setValue(true);
+        }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mUserRef.child("online").setValue(false);
     }
 
     private void sendToStart() {

@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar=(Toolbar)findViewById(R.id.main_page_toolbar);
         //setSupportActionBar(mToolbar);
-       // getSupportActionBar().setTitle("Chat24");
+        getSupportActionBar().setTitle("Chat24");
 
-        mUserRef=FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
-
+        if(mAuth.getCurrentUser()!=null) {
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
+        }
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
          mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -67,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mUserRef.child("online").setValue(false);
+        FirebaseUser currentUser=mAuth.getCurrentUser();
+        if(currentUser!=null){
+            mUserRef.child("online").setValue("online");
+        }
+
     }
 
     private void sendToStart() {

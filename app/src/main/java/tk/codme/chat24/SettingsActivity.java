@@ -131,15 +131,16 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               /* Intent galleryIntent=new Intent();
+                Intent galleryIntent=new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(galleryIntent,"SELECT IMAGE"),GALLERY_PICK);
-            */
+
                 // start picker to get image for cropping and then use the image in cropping activity
-                CropImage.activity()
+               /* CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(SettingsActivity.this);
+                        */
             }
         });
     }
@@ -202,6 +203,7 @@ public class SettingsActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(SettingsActivity.this, "Upload Error", Toast.LENGTH_LONG).show();
                         }
+                        mProgressDialog.dismiss();
                     }
 
                 });

@@ -34,7 +34,7 @@ public class StatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
 
-        mToolbar=(Toolbar)findViewById(R.id.status_appbar);
+        //mToolbar=(Toolbar)findViewById(R.id.status_appbar);
        // setSupportActionBar(mToolbar);
         //getSupportActionBar().setTitle("Status");
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);

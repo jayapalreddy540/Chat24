@@ -59,10 +59,10 @@
             android:ems="10"
             android:hint="Enter Message..."
             android:inputType="textPersonName"
-            android:paddingBottom="12dp"
             android:paddingLeft="10dp"
+            android:paddingTop="14dp"
             android:paddingRight="10dp"
-            android:paddingTop="14dp" />
+            android:paddingBottom="12dp" />
 
         <ImageButton
             android:id="@+id/chat_send_btn"

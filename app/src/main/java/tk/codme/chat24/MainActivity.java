@@ -2,11 +2,18 @@ package tk.codme.chat24;
 
 import androidx.viewpager.widget.ViewPager;
 import android.app.ProgressDialog;
+
+import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import androidx.appcompat.widget.Toolbar;
+import io.fabric.sdk.android.Fabric;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
+    private AdView mAdView;
 
     private ViewPager mViewPager;
     private Toolbar mToolbar;
@@ -35,12 +43,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        //initialising crashlytics
+        Fabric.with(this,new Crashlytics());
+        MobileAds.initialize(this,"ca-app-pub-4974110873156124~6823462870");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         mSignoutProgress=new ProgressDialog(this);
 
-        mToolbar=(Toolbar)findViewById(R.id.main_page_toolbar);
+       // mToolbar=(Toolbar)findViewById(R.id.main_page_toolbar);
         //setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Chat24");
+
 
         if(mAuth.getCurrentUser()!=null) {
             mUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());

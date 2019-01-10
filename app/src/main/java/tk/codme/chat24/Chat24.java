@@ -33,7 +33,7 @@ public class Chat24 extends Application {
 
         mAuth=FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null) {
-            mUsersDatabase = FirebaseDatabase.getInstance().getReference().child(mAuth.getCurrentUser().getUid());
+            mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
 
             mUsersDatabase.addValueEventListener(new ValueEventListener() {
                 @Override

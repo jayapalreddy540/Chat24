@@ -36,7 +36,7 @@ public class StatusActivity extends AppCompatActivity {
 
         //mToolbar=(Toolbar)findViewById(R.id.status_appbar);
        // setSupportActionBar(mToolbar);
-        //getSupportActionBar().setTitle("Status");
+        getSupportActionBar().setTitle("Your Status");
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String statusValue=getIntent().getStringExtra("status_value");

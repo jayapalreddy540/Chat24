@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context="tk.codme.chat24.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+   <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <!--  <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/> -->
+      <!-- <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/>-->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"

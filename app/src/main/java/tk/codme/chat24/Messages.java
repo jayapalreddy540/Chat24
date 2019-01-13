@@ -1,8 +1,7 @@
 package tk.codme.chat24;
 
 public class Messages {
-    public void Messages(){
-
+    public Messages() {
     }
 
     private String message,type,from;

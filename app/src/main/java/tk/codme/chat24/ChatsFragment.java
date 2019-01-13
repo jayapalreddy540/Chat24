@@ -66,10 +66,10 @@ public class ChatsFragment extends Fragment {
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
-        mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
+        mConvDatabase = FirebaseDatabase.getInstance().getReference().child("chat").child(mCurrent_user_id);
 
         mConvDatabase.keepSynced(true);
-        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         mMessageDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
 
@@ -89,8 +89,9 @@ public class ChatsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Query conversationQuery=mConvDatabase.orderByChild("timestamp");
         FirebaseRecyclerOptions<Conv> options = new FirebaseRecyclerOptions.Builder<Conv>()
-                .setQuery( mConvDatabase.orderByChild("timestamp"),Conv.class)
+                .setQuery(conversationQuery,Conv.class)
                 .build();
 
         FirebaseRecyclerAdapter<Conv, ConvViewHolder> firebaseConvAdapter = new FirebaseRecyclerAdapter<Conv, ConvViewHolder>(options) {
@@ -181,6 +182,7 @@ public class ChatsFragment extends Fragment {
         };
 
         mConvList.setAdapter(firebaseConvAdapter);
+        firebaseConvAdapter.startListening();
 
     }
 
@@ -226,7 +228,7 @@ public class ChatsFragment extends Fragment {
 
             ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
 
-            if(online_status.equals("true")){
+            if(online_status.equals("online")){
 
                 userOnlineView.setVisibility(View.VISIBLE);
 

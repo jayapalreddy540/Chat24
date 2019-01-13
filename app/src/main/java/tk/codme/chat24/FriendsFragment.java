@@ -83,7 +83,8 @@ public class FriendsFragment extends Fragment {
             @NonNull
             @Override
             public FriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_single_layout, parent, false);
+                return new FriendsViewHolder(view);
             }
 
             @Override
@@ -106,22 +107,22 @@ public class FriendsFragment extends Fragment {
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                CharSequence options[]=new CharSequence[]{"Open Profile","Send Message"};
-                                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                CharSequence options[] = new CharSequence[]{"Open Profile", "Send Message"};
+                              final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setTitle("Select Options");
                                 builder.setItems(options, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         //click event for each item
-                                        if(which==0){
-                                            Intent profileIntent=new Intent(getContext(),ProfileActivity.class);
-                                            profileIntent.putExtra("user_id",list_users_id);
+                                        if (which == 0) {
+                                            Intent profileIntent = new Intent(getContext(), ProfileActivity.class);
+                                            profileIntent.putExtra("user_id", list_users_id);
                                             startActivity(profileIntent);
                                         }
-                                        if(which==1){
-                                            Intent chatIntent=new Intent(getContext(),ChatActivity.class);
-                                            chatIntent.putExtra("user_id",list_users_id);
-                                            chatIntent.putExtra("user_name",userName);
+                                        if (which == 1) {
+                                            Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                            chatIntent.putExtra("user_id", list_users_id);
+                                            chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
                                         }
                                     }
@@ -141,6 +142,7 @@ public class FriendsFragment extends Fragment {
 
         };
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
+        friendsRecyclerViewAdapter.startListening();
     }
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder{
@@ -151,8 +153,8 @@ public class FriendsFragment extends Fragment {
         }
 
         public void setDate(String date){
-            TextView userNameView=(TextView)mView.findViewById(R.id.user_single_status);
-            userNameView.setText(date);
+            TextView userStatusView=(TextView)mView.findViewById(R.id.user_single_status);
+            userStatusView.setText(date);
         }
         public void setName(String name){
             TextView userNameView=(TextView)mView.findViewById(R.id.user_single_name);
@@ -164,7 +166,7 @@ public class FriendsFragment extends Fragment {
         }
         public void setUserOnline(String online_status){
             ImageView userOnline=(ImageView)mView.findViewById(R.id.user_single_online_icon);
-            if(online_status.equals("true")){
+            if(online_status.equals("online")){
                 userOnline.setVisibility(View.VISIBLE);
             }
             else userOnline.setVisibility(View.INVISIBLE);

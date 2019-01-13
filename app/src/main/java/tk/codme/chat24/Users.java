@@ -5,6 +5,8 @@ public class Users {
     public String image;
     public String status;
     public String thumb_image;
+    public String online;
+
 
     public Users(){
 
@@ -35,12 +37,16 @@ public class Users {
     public String getName() {
         return name;
     }
+   // public String getOnline() {return online; }
 
-    public Users(String name, String image, String status) {
+   // public void setOnline(String online) { this.online = online; }
+
+    public Users(String name, String image, String status,String online) {
         this.name = name;
         this.image = image;
         this.status = status;
         this.thumb_image=thumb_image;
+       // this.online=online;
     }
 
     public void setName(String name) {

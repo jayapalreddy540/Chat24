@@ -90,6 +90,14 @@ public class ProfileActivity extends AppCompatActivity {
                 mProfileStatus.setText(status);
                 Picasso.get().load(image).placeholder(R.drawable.default_img).into(mProfileImage);
 
+                if(mCurrent_user.getUid().equals(user_id)){
+                    mDeclineBtn.setEnabled(false);
+                    mDeclineBtn.setVisibility(View.INVISIBLE);
+
+                    mProfileSendReqBtn.setEnabled(false);
+                    mProfileSendReqBtn.setVisibility(View.INVISIBLE);
+                }
+
                 // friend list/request feature
                 mFriendReqDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -101,6 +109,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 mCurrent_state="req_recieved";
                                 mProfileSendReqBtn.setText("Accept Friend Request");
+
+                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setEnabled(true);
                             }
                             else if(req_type.equals("sent")){
                                 mCurrent_state="req_sent";

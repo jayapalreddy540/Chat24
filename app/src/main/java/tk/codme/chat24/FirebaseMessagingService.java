@@ -20,27 +20,59 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String notification_message=remoteMessage.getNotification().getBody();
         String click_action=remoteMessage.getNotification().getClickAction();
         String from_user_id=remoteMessage.getData().get("from_user_id");
+        String mchannelId = String.valueOf((int)System.currentTimeMillis());
 
-        NotificationCompat.Builder mBuilder=new NotificationCompat.Builder(this,"default")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(notification_title)
-                .setContentText(notification_message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = notification_title;
+            String description = notification_message;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(mchannelId, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
 
-        // Create an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(click_action);
-        resultIntent.putExtra("user_id",from_user_id);
+            // Create an explicit intent for an Activity in your app
+            Intent intent = new Intent(click_action);
+            intent.putExtra("user_id", from_user_id);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,resultIntent, 0);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, mchannelId)
+                    .setContentTitle(notification_title)
+                    .setContentText(notification_message)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    // Set the intent that will fire when the user taps the notification
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            int mNotificationId = (int) System.currentTimeMillis();
+            NotificationManager mNotifyMqr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMqr.notify(mNotificationId, mBuilder.build());
+        }
+        else {
+            // Create an explicit intent for an Activity in your app
+            Intent resultIntent = new Intent(click_action);
+            resultIntent.putExtra("user_id", from_user_id);
 
-        mBuilder.setContentIntent(resultPendingIntent);
+            resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, mchannelId)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle(notification_title)
+                    .setContentText(notification_message)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(resultPendingIntent)
+                    .setAutoCancel(true);
 
-        int mNotificationId=(int)System.currentTimeMillis();
-        NotificationManager mNotifyMqr=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        mNotifyMqr.notify(mNotificationId,mBuilder.build());
+            int mNotificationId = (int) System.currentTimeMillis();
+            NotificationManager mNotifyMqr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMqr.notify(mNotificationId, mBuilder.build());
+        }
     }
+
 
 }

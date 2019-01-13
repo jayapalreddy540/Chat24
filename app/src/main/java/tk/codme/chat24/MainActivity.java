@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             sendToStart();
         }
         else {
-            mUserRef.child("online").setValue(true);
+            mUserRef.child("online").setValue("online");
         }
     }
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         FirebaseUser currentUser=mAuth.getCurrentUser();
         if(currentUser!=null){
-            mUserRef.child("online").setValue("online");
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
         }
 
     }
@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
          super.onOptionsItemSelected(item);
          if(item.getItemId()==R.id.main_logout_btn){
+
+             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
              mSignoutProgress.setTitle("Logout");
              mSignoutProgress.setMessage("Logging out...");
              mSignoutProgress.setCanceledOnTouchOutside(false);

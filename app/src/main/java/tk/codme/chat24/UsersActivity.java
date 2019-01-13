@@ -61,6 +61,7 @@ public class UsersActivity extends AppCompatActivity {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
                 usersViewHolder.setUserImage(users.getImage());
+                //usersViewHolder.setUserOnline(users.getOnline());
 
                 final String user_id=getRef(i).getKey();
 
@@ -98,9 +99,9 @@ public class UsersActivity extends AppCompatActivity {
             CircleImageView userImageView=(CircleImageView)mView.findViewById(R.id.user_single_img);
             Picasso.get().load(thumb_image).placeholder(R.drawable.default_img).into(userImageView);
         }
-        public void setUserOnline(Boolean online_status){
+        public void setUserOnline(String online_status){
             ImageView userOnline=(ImageView)mView.findViewById(R.id.user_single_online_icon);
-            if(online_status.equals("true")){
+            if(online_status.equals("true")||online_status.equals("online")){
                 userOnline.setVisibility(View.VISIBLE);
             }
             else userOnline.setVisibility(View.INVISIBLE);

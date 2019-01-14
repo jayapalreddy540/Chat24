@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "390253503396",
+    "firebase_url": "https://chat24-2fdc9.firebaseio.com",
+    "project_id": "chat24-2fdc9",
+    "storage_bucket": "chat24-2fdc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390253503396:android:8cacc4ab9ff32813",
+        "android_client_info": {
+          "package_name": "tk.codme.chat24"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390253503396-9022k88427pb9gi067j36abiap3k0ruu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tk.codme.chat24",
+            "certificate_hash": "9dd72f660fb5754a3e70ed013f2bb369234643d7"
+          }
+        },
+        {
+          "client_id": "390253503396-uk7teq3dk5n79p5rbeues23ktmlaotmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5-RlG57VS4SzZ8AMPfGfAgVSKRaU-k3g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390253503396-uk7teq3dk5n79p5rbeues23ktmlaotmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-4974110873156124~6823462870"
+    }
+  ],
+  "configuration_version": "1"
+}

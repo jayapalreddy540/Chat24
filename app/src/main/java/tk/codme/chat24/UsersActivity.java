@@ -101,7 +101,7 @@ public class UsersActivity extends AppCompatActivity {
         }
         public void setUserOnline(String online_status){
             ImageView userOnline=(ImageView)mView.findViewById(R.id.user_single_online_icon);
-            if(online_status.equals("true")||online_status.equals("online")){
+            if(online_status.equals("online")){
                 userOnline.setVisibility(View.VISIBLE);
             }
             else userOnline.setVisibility(View.INVISIBLE);

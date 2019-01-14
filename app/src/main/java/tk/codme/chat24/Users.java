@@ -5,8 +5,12 @@ public class Users {
     public String image;
     public String status;
     public String thumb_image;
-    public String online;
+   // public String online;
+   // public String device_token;
 
+    //public String getOnline() { return online;}
+
+    //public void setOnline(String online) { this.online = online; }
 
     public Users(){
 
@@ -37,11 +41,9 @@ public class Users {
     public String getName() {
         return name;
     }
-   // public String getOnline() {return online; }
 
-   // public void setOnline(String online) { this.online = online; }
 
-    public Users(String name, String image, String status,String online) {
+    public Users(String name, String image, String status) {
         this.name = name;
         this.image = image;
         this.status = status;

@@ -45,7 +45,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                     .setContentTitle(notification_title)
                     .setContentText(notification_message)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    // Set the intent that will fire when the user taps the notification
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
             int mNotificationId = (int) System.currentTimeMillis();
@@ -61,7 +60,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, mchannelId)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_launcher)
                     .setContentTitle(notification_title)
                     .setContentText(notification_message)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)

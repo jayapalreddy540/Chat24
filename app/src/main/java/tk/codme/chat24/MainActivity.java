@@ -1,6 +1,8 @@
 package tk.codme.chat24;
 
 import androidx.viewpager.widget.ViewPager;
+
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
 import com.crashlytics.android.Crashlytics;
@@ -9,6 +11,9 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
 import androidx.appcompat.widget.Toolbar;
@@ -24,7 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ForceUpdateChecker.OnUpdateNeededListener {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
@@ -41,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ForceUpdateChecker.with(this).onUpdateNeeded(this).check();
 
         mAuth = FirebaseAuth.getInstance();
         //initialising crashlytics
@@ -132,5 +139,31 @@ public class MainActivity extends AppCompatActivity {
          return true;
     }
 
+    @Override
+    public void onUpdateNeeded(final String updateUrl) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("New version available")
+                .setMessage("Please, update app to new version to better experience")
+                .setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                redirectStore(updateUrl);
+                            }
+                        }).setNegativeButton("No, thanks",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).create();
+        dialog.show();
+    }
 
+    private void redirectStore(String updateUrl) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateUrl));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }
+

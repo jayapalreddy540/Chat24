@@ -58,14 +58,21 @@
             </intent-filter>
         </activity>
 
+
         <service android:name=".FirebaseMessagingService" >
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
         </service>
 
         <activity android:name=".ChatActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="tk.codme.chat24_MESSAGE_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="538cc647e88ff0a602792259f4e550591c573398" />

@@ -134,7 +134,7 @@ public class ChatActivity extends AppCompatActivity {
         //------- IMAGE STORAGE ---------
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
-        mRootRef.child("chat").child(mCurrentUserId).child(mCurrentUser).child("seen").setValue(true);
+        mRootRef.child("chat").child(mCurrentUserId).child(mCurrentUser).child("seen").setValue("true");
 
 
         loadMessages();
@@ -143,26 +143,19 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef.child("users").child(mCurrentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 String online=dataSnapshot.child("online").toString();
-                 String data= online.getClass().getName();
-                 Long online1=0L;
-                 if(data.equals("java.lang.String")){}
-                 else{
-                     online1 = Long.parseLong(dataSnapshot.child("online").toString());
-                 }
+                String online=dataSnapshot.child("online").toString();
 
-                String image=dataSnapshot.child("image").toString();
-
-                if(online.equals("online"))
-                {
-                    mLastSeenView.setText("online");
-                }
+                if(online.equals("online")){mLastSeenView.setText("online");}
                 else{
-                   // GetTimeAgo getTimeAgo=new GetTimeAgo();
-                   // long lastTime=Long.parseLong(online);
+                    Long online1 = (Long)(dataSnapshot.child("online").getValue());
+                    // GetTimeAgo getTimeAgo=new GetTimeAgo();
+                    // long lastTime=Long.parseLong(online);
                     //String lastSeenTime=getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
                     mLastSeenView.setText(getTimeDate(online1));
                 }
+
+                String image=dataSnapshot.child("image").toString();
+
             }
 
             @Override
@@ -177,7 +170,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.hasChild(mCurrentUser)){
                     Map chatAddMap=new HashMap();
-                    chatAddMap.put("seen",false);
+                    chatAddMap.put("seen","false");
                     chatAddMap.put("timestamp",ServerValue.TIMESTAMP);
 
                     Map chatUserMap=new HashMap();

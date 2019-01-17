@@ -46,6 +46,7 @@ public class StatusActivity extends AppCompatActivity {
         currentUser=FirebaseAuth.getInstance().getCurrentUser();
         String currentUid=currentUser.getUid();
         mRef=FirebaseDatabase.getInstance().getReference().child("users").child(currentUid);
+        mRef.keepSynced(true);
 
         mStatus=(TextInputLayout)findViewById(R.id.status_input);
         mStatusBtn=(Button)findViewById(R.id.status_btn);

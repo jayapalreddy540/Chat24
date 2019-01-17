@@ -9,6 +9,9 @@
         android:id="@+id/main_allusers_btn"
         android:title="All Users" />
     <item
+        android:id="@+id/main_about_btn"
+        android:title="About" />
+    <item
         android:id="@+id/main_logout_btn"
         android:title="@string/logout" />
 </menu>

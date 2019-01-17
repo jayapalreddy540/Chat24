@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
 
         if(mAuth.getCurrentUser()!=null) {
             mUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
+            mUserRef.keepSynced(true);
         }
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
          mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
@@ -134,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
          }
          if(item.getItemId()==R.id.main_allusers_btn){
              Intent usersIntent=new Intent(MainActivity.this,UsersActivity.class);
+             startActivity(usersIntent);
+         }
+         if(item.getItemId()==R.id.main_about_btn){
+             Intent usersIntent=new Intent(MainActivity.this,AboutActivity.class);
              startActivity(usersIntent);
          }
          return true;

@@ -98,6 +98,7 @@ public class ChatActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
 
         mRootRef=FirebaseDatabase.getInstance().getReference();
+        mRootRef.keepSynced(true);
         mAuth=FirebaseAuth.getInstance();
 
         mCurrentUser=getIntent().getStringExtra("user_id");
@@ -134,7 +135,7 @@ public class ChatActivity extends AppCompatActivity {
         //------- IMAGE STORAGE ---------
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
-        mRootRef.child("chat").child(mCurrentUserId).child(mCurrentUser).child("seen").setValue("true");
+        mRootRef.child("chat").child(mCurrentUserId).child(mCurrentUser).child("seen").setValue(true);
 
 
         loadMessages();
@@ -292,6 +293,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMoreMessages() {
         DatabaseReference messageRef=mRootRef.child("messages").child(mCurrentUserId).child(mCurrentUser);
+        messageRef.keepSynced(true);
         Query messageQuery=messageRef.orderByKey().endAt(mLastKey).limitToLast(10);
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
@@ -341,6 +343,7 @@ public class ChatActivity extends AppCompatActivity {
     public void loadMessages(){
 
         DatabaseReference messageRef=mRootRef.child("messages").child(mCurrentUserId).child(mCurrentUser);
+        messageRef.keepSynced(true);
 
         Query messageQuery=messageRef.limitToLast(mCurrentPage*TOTAL_ITEMS_TO_LOAD);
 
@@ -393,7 +396,6 @@ public class ChatActivity extends AppCompatActivity {
             String chat_user_ref="messages/"+mCurrentUser+"/"+mCurrentUserId;
 
             DatabaseReference user_message_push=mRootRef.child("messages").child(mCurrentUserId).child(mCurrentUser).push();
-
             String push_id=user_message_push.getKey();
 
             Map messageMap=new HashMap();

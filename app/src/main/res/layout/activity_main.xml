@@ -6,28 +6,26 @@
     android:layout_height="match_parent"
     tools:context="tk.codme.chat24.MainActivity">
 
-   <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <!-- <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/>-->
+        <!-- <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/>-->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.google.android.material.tabs.TabLayout>
+            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_tabPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="680dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_marginTop="0dp"></androidx.viewpager.widget.ViewPager>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

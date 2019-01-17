@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginPassword=(TextInputLayout)findViewById(R.id.login_Pass);
         mLogin_btn=(Button)findViewById(R.id.login_btn);
         mUserDatabase=FirebaseDatabase.getInstance().getReference().child("users");
+        mUserDatabase.keepSynced(true);
 
         mLoginProgress=new ProgressDialog(this);
         mLogin_btn.setOnClickListener(new View.OnClickListener() {

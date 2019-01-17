@@ -56,9 +56,13 @@ public class ProfileActivity extends AppCompatActivity {
         final String user_id=getIntent().getStringExtra("user_id");
 
         mUsersDatabase=FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+        mUsersDatabase.keepSynced(true);
         mFriendReqDatabase=FirebaseDatabase.getInstance().getReference().child("Friend_req");
+        mFriendReqDatabase.keepSynced(true);
         mFriendDatabase=FirebaseDatabase.getInstance().getReference().child("Friends");
+        mFriendDatabase.keepSynced(true);
         mNotificationDatabase=FirebaseDatabase.getInstance().getReference().child("notifications");
+        mNotificationDatabase.keepSynced(true);
         mCurrent_user=FirebaseAuth.getInstance().getCurrentUser();
         mRootRef=FirebaseDatabase.getInstance().getReference();
 

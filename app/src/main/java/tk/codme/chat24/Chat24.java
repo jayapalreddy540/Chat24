@@ -34,7 +34,7 @@ public class Chat24 extends Application {
         mAuth=FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null) {
             mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid());
-
+            mUsersDatabase.keepSynced(true);
             mUsersDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

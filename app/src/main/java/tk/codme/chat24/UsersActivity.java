@@ -32,7 +32,7 @@ public class UsersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users);
 
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-
+        mUsersDatabase.keepSynced(true);
         mUsersList = (RecyclerView) findViewById(R.id.users_list);
         mUsersList.setHasFixedSize(true);
         mUsersList.setLayoutManager(new LinearLayoutManager(this));

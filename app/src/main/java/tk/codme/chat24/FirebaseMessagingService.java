@@ -19,7 +19,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String notification_title=remoteMessage.getNotification().getTitle();
         String notification_message=remoteMessage.getNotification().getBody();
         String click_action=remoteMessage.getNotification().getClickAction();
-        String from_user_id=remoteMessage.getData().get("from_user_id");
+        String from_user_id=remoteMessage.getData().get("user_id");
         String mchannelId = String.valueOf((int)System.currentTimeMillis());
 
         // Create the NotificationChannel, but only on API 26+ because

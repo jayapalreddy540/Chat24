@@ -27,7 +27,7 @@ public class AboutActivity  extends AppCompatActivity {
 
         int versionNumber=pinfo.versionCode;
         String versionName=pinfo.versionName;
-        versiontxt.setText("Version : "+versionName+versionNumber);
+        versiontxt.setText("Version : "+versionName+"."+versionNumber);
 
     }
 }

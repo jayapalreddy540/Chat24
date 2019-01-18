@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
         mSectionsPagerAdapter=new SectionsPagerAdapter(getSupportFragmentManager());
          mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(1);
         mTabLayout=(TabLayout)findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 

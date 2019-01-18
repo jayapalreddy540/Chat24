@@ -146,14 +146,28 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String online=dataSnapshot.child("online").toString();
 
-                if(online.equals("online")){mLastSeenView.setText("online");}
+              /*  if(online.equals("online")){mLastSeenView.setText("online");}
                 else{
-                    Long online1 = (Long)(dataSnapshot.child("online").getValue());
-                    // GetTimeAgo getTimeAgo=new GetTimeAgo();
-                    // long lastTime=Long.parseLong(online);
-                    //String lastSeenTime=getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
-                    mLastSeenView.setText(getTimeDate(online1));
+                   // Long online1 = (Long)(dataSnapshot.child("online").getValue());
+                    //mLastSeenView.setText(getTimeDate(online1));
+
+                     GetTimeAgo getTimeAgo=new GetTimeAgo();
+                     long lastTime=(Long)(dataSnapshot.child("online").getValue());
+                    String lastSeenTime=getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
+                    mLastSeenView.setText(lastSeenTime);
                 }
+                */
+
+              try{
+                  GetTimeAgo getTimeAgo=new GetTimeAgo();
+                  long lastTime=(Long)(dataSnapshot.child("online").getValue());
+                  String lastSeenTime=getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
+                  mLastSeenView.setText(lastTime+"("+lastSeenTime+")");
+              }
+              catch(Exception e)
+              {
+                  mLastSeenView.setText("online");
+              }
 
                 String image=dataSnapshot.child("image").toString();
 

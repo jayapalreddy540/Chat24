@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import android.content.Intent;
 
@@ -217,11 +219,23 @@ public class ChatsFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(final String thumb_image, Context ctx){
 
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_img);
-            Picasso.get().load(thumb_image).placeholder(R.drawable.default_img).into(userImageView);
+           final CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_img);
+            if (!thumb_image.equals("default")) {
+                //Picasso.get().load(image).placeholder(R.drawable.default_img).into(mDisplayImage);
+                Picasso.get().load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_img).into(userImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
 
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get().load(thumb_image).placeholder(R.drawable.default_img).into(userImageView);
+                    }
+                });
+            }
         }
 
         public void setUserOnline(String online_status) {

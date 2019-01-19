@@ -39,6 +39,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -172,18 +173,21 @@ public class SettingsActivity extends AppCompatActivity {
 
                 Bitmap thumb_bitmap = null;
                 try {
-                    thumb_bitmap = new Compressor(this).setMaxWidth(200).setMaxHeight(200)
-                            .setQuality(75).compressToBitmap(thumb_filePath);
+                    thumb_bitmap = new Compressor(this)
+                            .setMaxWidth(200)
+                            .setMaxHeight(200)
+                            .setQuality(50)
+                            .compressToBitmap(thumb_filePath);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                 final byte[] thumb_byte = baos.toByteArray();
 
 
                 final StorageReference filepath = mImageStorage.child("profile_images").child(currentUserId + ".jpg");
-                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumbs").child(currentUserId + ".jpg");
+
                 UploadTask uploadTask = filepath.putFile(resultUri);
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -209,7 +213,9 @@ public class SettingsActivity extends AppCompatActivity {
 
                 });
 
-              /*  UploadTask uploadTask1=thumb_filepath.putFile(thumb_bitmap);
+
+                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumbs").child(currentUserId + ".jpg");
+                UploadTask uploadTask1=thumb_filepath.putBytes(thumb_byte);
                 Task<Uri> urlTask1 =uploadTask1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -233,7 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     }
 
-                });  */
+                });
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 //Exception error = result.getError();

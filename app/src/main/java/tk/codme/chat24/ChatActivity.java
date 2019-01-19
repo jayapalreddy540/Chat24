@@ -162,14 +162,14 @@ public class ChatActivity extends AppCompatActivity {
                   GetTimeAgo getTimeAgo=new GetTimeAgo();
                   long lastTime=(Long)(dataSnapshot.child("online").getValue());
                   String lastSeenTime=getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
-                  mLastSeenView.setText(lastTime+"("+lastSeenTime+")");
+                  mLastSeenView.setText(getTimeDate(lastTime)+" ("+lastSeenTime+")");
               }
               catch(Exception e)
               {
                   mLastSeenView.setText("online");
               }
 
-                String image=dataSnapshot.child("image").toString();
+                String image=dataSnapshot.child("thumb_image").toString();
 
             }
 

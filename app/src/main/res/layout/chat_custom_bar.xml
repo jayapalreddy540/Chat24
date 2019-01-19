@@ -6,29 +6,30 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/custom_bar_image"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/default_img" />
 
     <TextView
         android:id="@+id/custom_bar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="50dp"
         android:text="Display Name"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/custom_bar_seen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="130dp"
+        android:layout_height="28dp"
         android:layout_below="@+id/custom_bar_title"
+        android:layout_marginStart="50dp"
         android:text="Last Seen"
         android:textColor="@android:color/white"
         android:textSize="13sp" />

@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -96,13 +98,14 @@ public class FriendsFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         final String userName=dataSnapshot.child("name").getValue().toString();
-                        String thumbImage=dataSnapshot.child("thumb_image").getValue().toString();
+                        final String thumbImage=dataSnapshot.child("thumb_image").getValue().toString();
+
                         if(dataSnapshot.hasChild("online")) {
                             String userOnline = dataSnapshot.child("online").getValue().toString();
-                            friendsViewHolder.setUserOnline(userOnline);
+                            friendsViewHolder.setOnline(userOnline);
                         }
                         friendsViewHolder.setName(userName);
-                        friendsViewHolder.setUserImage(thumbImage);
+                        friendsViewHolder.setThumb_image(thumbImage);
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -160,11 +163,24 @@ public class FriendsFragment extends Fragment {
             TextView userNameView=(TextView)mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
         }
-        public void setUserImage(String thumb_image){
-            CircleImageView userImageView=(CircleImageView)mView.findViewById(R.id.user_single_img);
-            Picasso.get().load(thumb_image).placeholder(R.drawable.default_img).into(userImageView);
+        public void setThumb_image(final String thumb_image){
+            final CircleImageView userImageView=(CircleImageView)mView.findViewById(R.id.user_single_img);
+            if (!thumb_image.equals("default")) {
+                //Picasso.get().load(image).placeholder(R.drawable.default_img).into(mDisplayImage);
+                Picasso.get().load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_img).into(userImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get().load(thumb_image).placeholder(R.drawable.default_img).into(userImageView);
+                    }
+                });
+            }
         }
-        public void setUserOnline(String online_status){
+        public void setOnline(String online_status){
             ImageView userOnline=(ImageView)mView.findViewById(R.id.user_single_online_icon);
             if(online_status.equals("online")){
                 userOnline.setVisibility(View.VISIBLE);

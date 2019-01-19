@@ -6,81 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
-        app:srcCompat="@drawable/default_img" />
+        android:layout_marginTop="50dp"
+        android:src="@drawable/default_img" />
 
     <TextView
         android:id="@+id/profile_displayName"
-        android:layout_width="match_parent"
+        android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="130dp"
-        android:text="Display Name" />
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="116dp"
+        android:text="Display Name"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/profile_status"
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_displayName"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="219dp"
-        android:text="Current User Status" />
-
-
-    <Button
-        android:id="@+id/profile_send_req_btn"
-        android:layout_width="216dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginBottom="77dp"
-        android:text="SEND FRIEND REQUEST" />
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="45dp"
+        android:text="Current User Status"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/profile_totalFriends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_status"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="151dp"
-        android:layout_marginEnd="151dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="10dp"
         android:text="Total Friends" />
+
+
+    <Button
+        android:id="@+id/profile_send_req_btn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_totalFriends"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="98dp"
+        android:text="SEND FRIEND REQUEST" />
+
 
     <Button
         android:id="@+id/profile_fndreqdecline_btn"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_send_req_btn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="90dp"
-        android:layout_marginEnd="82dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="106dp"
         android:text="DECLINE FRIEND REQUEST" />
 
 

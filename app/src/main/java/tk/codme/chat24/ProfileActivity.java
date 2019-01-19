@@ -3,6 +3,7 @@ package tk.codme.chat24;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -33,7 +36,7 @@ import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ImageView mProfileImage;
+    private CircleImageView mProfileImage;
     private TextView mProfileName,mProfileStatus,mProfileFriendscount;
     private Button mProfileSendReqBtn;
     private Button mDeclineBtn;
@@ -66,7 +69,6 @@ public class ProfileActivity extends AppCompatActivity {
         mCurrent_user=FirebaseAuth.getInstance().getCurrentUser();
         mRootRef=FirebaseDatabase.getInstance().getReference();
 
-        mProfileImage=(ImageView)findViewById(R.id.profile_image);
         mProfileName=(TextView)findViewById(R.id.profile_displayName);
         mProfileStatus=(TextView)findViewById(R.id.profile_status);
         mProfileFriendscount=(TextView)findViewById(R.id.profile_totalFriends);
@@ -88,11 +90,25 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String display_name=dataSnapshot.child("name").getValue().toString();
                 String status=dataSnapshot.child("status").getValue().toString();
-                String image=dataSnapshot.child("image").getValue().toString();
+                final String image=dataSnapshot.child("image").getValue().toString();
 
                 mProfileName.setText(display_name);
                 mProfileStatus.setText(status);
-                Picasso.get().load(image).placeholder(R.drawable.default_img).into(mProfileImage);
+                final CircleImageView mProfileImage=(CircleImageView)findViewById(R.id.profile_image);
+                if (!image.equals("default")) {
+                    //Picasso.get().load(image).placeholder(R.drawable.default_img).into(mDisplayImage);
+                    Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.default_img).into(mProfileImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            Picasso.get().load(image).placeholder(R.drawable.default_img).into(mProfileImage);
+                        }
+                    });
+                }
 
                 if(mCurrent_user.getUid().equals(user_id)){
                     mDeclineBtn.setEnabled(false);

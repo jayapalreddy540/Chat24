@@ -12,7 +12,9 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.content.Intent;
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements ForceUpdateChecke
         mViewPager.setCurrentItem(1);
         mTabLayout=(TabLayout)findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
 
     }
 

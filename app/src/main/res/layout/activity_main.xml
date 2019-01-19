@@ -21,22 +21,24 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_tabPager"
         android:layout_width="match_parent"
-        android:layout_height="680dp"
+        android:layout_height="719dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"></androidx.viewpager.widget.ViewPager>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="76dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-4974110873156124~6823462870">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-4974110873156124~6823462870"></com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>

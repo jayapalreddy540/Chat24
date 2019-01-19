@@ -1,9 +1,12 @@
 package tk.codme.chat24;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import com.google.firebase.messaging.RemoteMessage;
@@ -23,6 +26,7 @@ public class FirebaseMessageNotification extends com.google.firebase.messaging.F
             String userName=remoteMessage.getData().get("user_name");
 
             String mchannelId = String.valueOf((int)System.currentTimeMillis());
+
 
             // Create the NotificationChannel, but only on API 26+ because
             // the NotificationChannel class is new and not in the support library
@@ -45,7 +49,7 @@ public class FirebaseMessageNotification extends com.google.firebase.messaging.F
                 PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, mchannelId)
-                        .setContentTitle(notification_title)
+                        .setContentTitle(notification_title+""+userName)
                         .setSmallIcon(R.drawable.default_img)
                         .setContentText(notification_message)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
@@ -55,8 +57,8 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-    private Button mStatusBtn;
-    private Button mImgBtn;
+    private ImageButton mStatusBtn;
+    private ImageButton mImgBtn;
     private ProgressDialog mProgressDialog;
     private static final int GALLERY_PICK=1;
 
@@ -71,8 +73,8 @@ public class SettingsActivity extends AppCompatActivity {
         mDisplayImage=(CircleImageView)findViewById(R.id.settings_image);
         mName=(TextView)findViewById(R.id.settings_name);
         mStatus=(TextView)findViewById(R.id.settings_profile);
-        mStatusBtn=(Button)findViewById(R.id.settings_changeStatusBtn);
-        mImgBtn=(Button)findViewById(R.id.settings_changeImgBtn);
+        mStatusBtn=(ImageButton)findViewById(R.id.settings_changeStatusBtn);
+        mImgBtn=(ImageButton)findViewById(R.id.settings_changeImgBtn);
 
         mImageStorage=FirebaseStorage.getInstance().getReference();
 
@@ -92,6 +94,8 @@ public class SettingsActivity extends AppCompatActivity {
 
                 mName.setText(name);
                 mStatus.setText(status);
+                mName.setGravity(Gravity.CENTER);
+                mStatus.setGravity(Gravity.CENTER);
 
                 if (!image.equals("default")) {
                     //Picasso.get().load(image).placeholder(R.drawable.default_img).into(mDisplayImage);

@@ -4,65 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message_single_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:weightSum="10">
+    android:layout_height="wrap_content">
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/message_profile_layout"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_weight="0"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/default_img" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/message_profile_layout_right"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="7dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/default_img" />
     <TextView
         android:id="@+id/message_text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text_layout"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:padding="0dp"
+        android:layout_width="346dp"
+        android:layout_height="51dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        android:padding="15dp"
         android:text="Message Text"
-        android:textColor="#444444"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/name_text_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:text="Display Name"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/time_text_layout"
-        android:layout_width="41dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="200dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="00:00"
-        android:textSize="12sp" />
+        android:textStyle="normal" />
 
     <ImageView
         android:id="@+id/message_image_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:outlineAmbientShadowColor="@color/colorAccent"
-        android:layout_alignStart="@+id/message_text_layout"
-        android:layout_below="@+id/message_text_layout"
-        android:layout_marginLeft="0dp"
-        android:layout_toEndOf="@+id/message_profile_layout"
-        android:padding="0dp"
-        android:scaleType="centerCrop" />
+        android:layout_width="198dp"
+        android:layout_height="189dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="11dp" />
 
+    <!--  <TextView
+       android:id="@+id/name_text_layout"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_marginLeft="10dp"
+       android:layout_toEndOf="@+id/message_profile_layout"
+       android:text="Display Name"
+       android:textColor="@android:color/black"
+       android:textSize="15sp"
+       android:textStyle="bold" />-->
+
+    <!-- <TextView
+         android:id="@+id/time_text_layout"
+         android:layout_width="41dp"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_alignParentEnd="true"
+         android:layout_marginStart="200dp"
+         android:layout_marginRight="10dp"
+         android:layout_marginEnd="10dp"
+         android:text="00:00"
+         android:textSize="12sp" />-->
 
 </RelativeLayout>

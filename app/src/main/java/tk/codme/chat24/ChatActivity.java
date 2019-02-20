@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -66,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private StorageReference mImageStorage;
-    private String mCurrentUserId;
+    private String mCurrentUserId,online,image,name;
 
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
@@ -93,7 +94,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        ActionBar actionBar=getSupportActionBar();
+       ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
@@ -105,7 +106,7 @@ public class ChatActivity extends AppCompatActivity {
         mCurrentUserName=getIntent().getStringExtra("user_name");
         mCurrentUserId=mAuth.getCurrentUser().getUid();
 
-        getSupportActionBar().setTitle(mCurrentUserName);
+        getSupportActionBar().setTitle("");
 
         LayoutInflater inflater=(LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View action_bar_view=inflater.inflate(R.layout.chat_custom_bar,null);
@@ -144,7 +145,13 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef.child("users").child(mCurrentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String online=dataSnapshot.child("online").toString();
+                 online=dataSnapshot.child("online").toString();
+                 image=dataSnapshot.child("thumb_image").toString();
+                name=dataSnapshot.child("name").toString();
+
+
+
+
 
               /*  if(online.equals("online")){mLastSeenView.setText("online");}
                 else{
@@ -169,8 +176,6 @@ public class ChatActivity extends AppCompatActivity {
                   mLastSeenView.setText("online");
               }
 
-                String image=dataSnapshot.child("thumb_image").toString();
-
             }
 
             @Override
@@ -179,6 +184,13 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Picasso.get().load(image)
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.default_img).into(mProfileImage);
+
 
         mRootRef.child("chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override

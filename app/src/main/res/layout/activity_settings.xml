@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/browser_actions_bg_grey"
     tools:context=".SettingsActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -20,43 +20,56 @@
         android:id="@+id/settings_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="243dp"
+        android:layout_below="@+id/settings_image"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="133dp"
         android:text="Display Name"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/settings_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="192dp"
+        android:layout_below="@+id/settings_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="100dp"
         android:text="Hi there! Iam using chat24"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="20sp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/settings_changeImgBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
-        android:backgroundTint="@android:color/white"
-        android:text="CHANGE IMAGE"
-        android:textColor="@color/colorPrimary" />
+        android:layout_width="39dp"
+        android:layout_height="41dp"
+        android:layout_alignStart="@+id/settings_image"
+        android:layout_alignTop="@+id/settings_image"
+        android:layout_alignEnd="@+id/settings_image"
+        android:layout_alignBottom="@+id/settings_image"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="-9dp"
+        android:background="@null"
+        android:src="@drawable/image_change"
+        android:visibility="visible" />
 
-    <Button
+    <ImageButton
         android:id="@+id/settings_changeStatusBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="CHANGE STATUS" />
+        android:layout_below="@+id/settings_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="43dp"
+        android:background="@null"
+        android:src="@drawable/edit_name"
+        android:visibility="visible" />
 
 </RelativeLayout>
